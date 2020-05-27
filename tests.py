@@ -31,7 +31,21 @@ class AppdeaTestCase(unittest.TestCase):
         self.assertTrue(data['success'])
         self.assertTrue(data['appdeas'])
         self.assertTrue(data['results_count'])
+        
+    def test_create_appdea(self):
+        new_appdea = {
+            'name': 'My new app',
+            'description': 'My new app in TypeScript'
+        }
+        res = self.client().post('/appdeas', json=new_appdea)
+        data = json.loads(res.data)
 
+        self.assertEqual(res.status_code, 200)
+        self.assertTrue(data['success'])
+        self.assertTrue(data['appdea'])
+
+
+        
 
 if __name__ == '__main__':
     unittest.main()

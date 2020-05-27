@@ -4,9 +4,11 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from models import setup_db
+from controllers.appdeas import appdeas
 
 def create_app(test_config=None):
     app = Flask(__name__)
+    app.register_blueprint(appdeas)
     CORS(app)
     setup_db(app)
 
