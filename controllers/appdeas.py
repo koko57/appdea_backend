@@ -8,7 +8,7 @@ appdeas = Blueprint('appdeas', __name__)
 def get_appdeas():
     results = Appdea.query.all()
 
-    formatted = [result.format() for result in results]
+    formatted = [result.format_short() for result in results]
 
     return jsonify(
         success=True,
@@ -30,4 +30,14 @@ def create_appdea():
     except:
         abort(500)
 
-    return jsonify(success=True, appdea=new_appdea.format())
+    return jsonify(success=True, appdea=new_appdea.format_short())
+
+
+@appdeas.route('/appdeas/<int:id>')
+def get_appdea(id):
+    result = Appdea.query.filter_by(id=id).first()
+
+    return jsonify(
+        success=True,
+        appdea=result.format_long(),
+    )

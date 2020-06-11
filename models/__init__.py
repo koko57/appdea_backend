@@ -35,9 +35,16 @@ class Appdea(db.Model):
         db.session.delete(self)
         db.session.commit()
     
-    def format(self):
+    def format_short(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+        }
+
+    def format_long(self):
         return {
             'id': self.id,
             'name': self.name,
             'description': self.description
         }
+

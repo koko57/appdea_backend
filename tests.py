@@ -44,7 +44,14 @@ class AppdeaTestCase(unittest.TestCase):
         self.assertTrue(data['success'])
         self.assertTrue(data['appdea'])
 
+    def test_get_appdea(self):
+        res = self.client().get('/appdeas/1')
+        data = json.loads(res.data)
 
+        self.assertEqual(res.status_code, 200)
+        self.assertTrue(data['success'])
+        self.assertTrue(data['appdea'])
+        
         
 
 if __name__ == '__main__':
