@@ -1,4 +1,3 @@
-
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -7,14 +6,14 @@ from models import setup_db
 from controllers.appdeas import appdeas
 
 def create_app(test_config=None):
-    app = Flask(__name__)
-    app.register_blueprint(appdeas)
-    CORS(app)
-    setup_db(app)
+    flask_app = Flask(__name__)
+    flask_app.register_blueprint(appdeas)
+    CORS(flask_app)
+    setup_db(flask_app)
 
-    return app
+    return flask_app
 
-flask_app = create_app()
+app = create_app()
 
 if __name__ == '__main__':
-    flask_app.run(host='0.0.0.0', port=8080, debug=True)
+    app.run(host='0.0.0.0', port=8080, debug=True)
