@@ -51,7 +51,19 @@ class AppdeaTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertTrue(data['success'])
         self.assertTrue(data['appdea'])
+
+    def test_delete_appdea(self):
+        appdea_to_delete = Appdea.query.order_by(Appdea.id).all()[-1]
+        appdea_id = appdea_to_delete.id
+
+        res = self.client().delete(f'/appdeas/{appdea_id}')
+        data = json.loads(res.data)
+
+        appdea = Appdea.query.filter_by(id=appdea_id).one_or_none()
         
+        self.assertEqual(res.status_code, 200)
+        self.assertTrue(data['success'])
+        self.assertEqual(appdea, None)
         
 
 if __name__ == '__main__':

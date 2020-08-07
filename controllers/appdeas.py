@@ -41,3 +41,15 @@ def get_appdea(id):
         success=True,
         appdea=result.format_long(),
     )
+
+@appdeas.route('/appdeas/<int:id>', methods=['DELETE'])
+def delete_coffee(id):
+    appdea_to_delete = Appdea.query.filter_by(id=id).first()
+    deleted_id = appdea_to_delete.id
+
+    try:
+        Appdea.delete(appdea_to_delete)
+    except:
+        abort(500)
+
+    return jsonify(success=True, appdea=deleted_id)

@@ -12,10 +12,6 @@ def create_app(test_config=None):
     CORS(app)
     setup_db(app)
 
-    @app.route('/')
-    def hello():
-        return 'Hello, World!'
-
     return app
 
 flask_app = create_app()
