@@ -1,7 +1,7 @@
-
 import os
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, String, Integer
+from flask_migrate import Migrate
 
 database_path = os.environ['DATABASE_URL']
 
@@ -13,6 +13,7 @@ def setup_db(app, database_path=database_path):
     db.app = app
     db.init_app(app)
     db.create_all()
+    migrate = Migrate(app, db)
 
 
 class Appdea(db.Model):
